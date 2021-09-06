@@ -35,8 +35,9 @@ class MainActivity : AppCompatActivity() {
             var text1 = editText.text.toString()
 //            var text2 = String("한글 왜 안돼".toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
             var text2 = "카카오톡 유료화"
+            var nolist = "검색 결과가 없습니다."
 
-            serverTest.requestServer(text2).enqueue(object: Callback<Send_test> {
+            serverTest.requestServer(text1).enqueue(object: Callback<Send_test> {
                 override fun onFailure(call: Call<Send_test>, t: Throwable) {
                     var dialog = AlertDialog.Builder(this@MainActivity)
                     dialog.setTitle("에러")
@@ -46,19 +47,23 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<Send_test>, response: Response<Send_test>) {
                     var send_test = response.body()
-                    Log.d("LOGIN","msg : "+send_test?.response)
-                    Log.d("LOGIN","msg : "+send_test?.NaverTitle)
-                    Log.d("LOGIN","msg : " + send_test!!.NaverTitle.slice(1..3))
+                    try {
+                        Log.d("LOGIN","msg : "+send_test?.response)
+                        Log.d("LOGIN","msg : "+send_test?.NaverTitle)
+                        Log.d("LOGIN","msg : " + send_test!!.NaverTitle.slice(0..0))
 
-                    val arraylist = send_test!!.NaverTitle
-                    for (i in 0..arraylist.size-1){
-                        Log.d("LOGIN", "msg : " + arraylist.slice(i..i))
+                        val arraylist = send_test!!.NaverTitle
+                        for (i in 0..arraylist.size-1){
+                            Log.d("LOGIN", "msg : " + arraylist.slice(i..i))
+                        }
+
+                        var dialog = AlertDialog.Builder(this@MainActivity)
+                        dialog.setTitle(send_test?.response)
+                        dialog.setMessage(send_test?.response)
+                        dialog.show()
+                    } catch (e: Exception){
+                        Log.d("LOGIN", "msg : " + nolist)
                     }
-
-                    var dialog = AlertDialog.Builder(this@MainActivity)
-                    dialog.setTitle(send_test?.response)
-                    dialog.setMessage(send_test?.response)
-                    dialog.show()
                 }
             })
         }
