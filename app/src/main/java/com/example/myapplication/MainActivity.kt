@@ -25,10 +25,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var retrofit = Retrofit.Builder()
-                .baseUrl("http://52.78.96.19:8080")
+                .baseUrl("http://13.124.235.42:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         var serverTest: Server_test = retrofit.create(Server_test::class.java)
+        var kakaoTest: Kakao_Send = retrofit.create(Kakao_Send::class.java)
 
 
         button.setOnClickListener{
@@ -50,16 +51,55 @@ class MainActivity : AppCompatActivity() {
                     try {
                         Log.d("LOGIN","msg : "+send_test?.response)
                         Log.d("LOGIN","msg : "+send_test?.NaverTitle)
-                        Log.d("LOGIN","msg : " + send_test!!.NaverTitle.slice(0..0))
 
                         val arraylist = send_test!!.NaverTitle
                         for (i in 0..arraylist.size-1){
                             Log.d("LOGIN", "msg : " + arraylist.slice(i..i))
+                            Log.d("LOGIN", "msg : " + arraylist.get(i))
                         }
 
                         var dialog = AlertDialog.Builder(this@MainActivity)
                         dialog.setTitle(send_test?.response)
-                        dialog.setMessage(send_test?.response)
+                        dialog.setMessage(arraylist.get(0))
+                        dialog.show()
+                    } catch (e: Exception){
+                        Log.d("LOGIN", "msg : " + nolist)
+                    }
+                }
+            })
+        }
+
+
+        button2.setOnClickListener{
+            var text1 = editText.text.toString()
+//            var text2 = String("한글 왜 안돼".toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
+            var text2 = "카카오톡 유료화"
+            var nolist = "검색 결과가 없습니다."
+
+            kakaoTest.requestServer(text1).enqueue(object: Callback<Kakao_requests> {
+                override fun onFailure(call: Call<Kakao_requests>, t: Throwable) {
+                    var dialog = AlertDialog.Builder(this@MainActivity)
+                    dialog.setTitle("에러")
+                    dialog.setMessage("호출실패했습니다.")
+                    dialog.show()
+                }
+
+                override fun onResponse(call: Call<Kakao_requests>, response: Response<Kakao_requests>) {
+                    var send_test = response.body()
+                    try {
+                        Log.d("LOGIN","msg : "+send_test?.response)
+                        Log.d("LOGIN","msg : "+send_test?.objectivity)
+                        Log.d("LOGIN","msg : "+send_test?.NaverTitle)
+
+                        val arraylist = send_test!!.NaverTitle
+                        for (i in 0..arraylist.size-1){
+                            Log.d("LOGIN", "msg : " + arraylist.slice(i..i))
+                            Log.d("LOGIN", "msg : " + arraylist.get(i))
+                        }
+
+                        var dialog = AlertDialog.Builder(this@MainActivity)
+                        dialog.setTitle(send_test?.response)
+                        dialog.setMessage(send_test?.objectivity)
                         dialog.show()
                     } catch (e: Exception){
                         Log.d("LOGIN", "msg : " + nolist)

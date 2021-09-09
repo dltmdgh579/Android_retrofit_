@@ -14,3 +14,13 @@ interface Server_test{
     ) : Call<Send_test>
 
 }
+
+interface Kakao_Send{
+    @FormUrlEncoded
+//    @Headers("Content-Type:application/json")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    @POST("/kakao")
+    fun requestServer(
+        @Field("responseTest") responseTest:String
+    ) : Call<Kakao_requests>
+}
