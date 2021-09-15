@@ -3,15 +3,51 @@ package com.example.myapplication
 import retrofit2.Call
 import retrofit2.http.*
 
-interface Server_test{
+interface Politics_Send{
 
     @FormUrlEncoded
 //    @Headers("Content-Type:application/json")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-    @POST("/")
+    @POST("/politics")
     fun requestServer(
         @Field("responseTest") responseTest:String
-    ) : Call<Send_test>
+    ) : Call<Politics_requests>
+
+}
+
+interface Economy_Send{
+
+    @FormUrlEncoded
+//    @Headers("Content-Type:application/json")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    @POST("/economy")
+    fun requestServer(
+        @Field("responseTest") responseTest:String
+    ) : Call<Economy_requests>
+
+}
+
+interface Society_Send{
+
+    @FormUrlEncoded
+//    @Headers("Content-Type:application/json")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    @POST("/society")
+    fun requestServer(
+        @Field("responseTest") responseTest:String
+    ) : Call<Society_requests>
+
+}
+
+interface Others_Send{
+
+    @FormUrlEncoded
+//    @Headers("Content-Type:application/json")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    @POST("/others")
+    fun requestServer(
+        @Field("responseTest") responseTest:String
+    ) : Call<Others_requests>
 
 }
 
