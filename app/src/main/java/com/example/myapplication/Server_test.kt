@@ -23,7 +23,7 @@ interface Economy_Send{
     @POST("/economy")
     fun requestServer(
         @Field("responseTest") responseTest:String
-    ) : Call<Economy_requests>
+    ) : Call<Politics_requests>
 
 }
 
@@ -35,7 +35,7 @@ interface Society_Send{
     @POST("/society")
     fun requestServer(
         @Field("responseTest") responseTest:String
-    ) : Call<Society_requests>
+    ) : Call<Politics_requests>
 
 }
 
@@ -47,7 +47,7 @@ interface Others_Send{
     @POST("/others")
     fun requestServer(
         @Field("responseTest") responseTest:String
-    ) : Call<Others_requests>
+    ) : Call<Politics_requests>
 
 }
 

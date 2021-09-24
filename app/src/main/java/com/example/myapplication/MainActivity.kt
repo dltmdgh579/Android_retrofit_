@@ -57,19 +57,19 @@ class MainActivity : AppCompatActivity() {
                                         }
 
                                         override fun onResponse(call: Call<Politics_requests>, response: Response<Politics_requests>) {
-                                            var send_test = response.body()
+//                                            var send_test = response.body()
                                             try {
-                                                Log.d("LOGIN","msg : "+send_test?.response)
-                                                Log.d("LOGIN","msg : "+send_test?.NaverTitle)
+                                                Log.d("LOGIN","msg : "+response.body()?.response)
+                                                Log.d("LOGIN","msg : "+response.body()?.NaverTitle)
 
-                                                val arraylist = send_test!!.NaverTitle
+                                                val arraylist = response.body()!!.NaverTitle
                                                 for (i in 0..arraylist.size-1){
                                                     Log.d("LOGIN", "msg : " + arraylist.slice(i..i))
                                                     Log.d("LOGIN", "msg : " + arraylist.get(i))
                                                 }
 
                                                 var dialog = AlertDialog.Builder(this@MainActivity)
-                                                dialog.setTitle(send_test?.response)
+                                                dialog.setTitle(response.body()?.response)
                                                 dialog.setMessage(arraylist.get(0))
                                                 dialog.show()
                                             } catch (e: Exception){
@@ -86,15 +86,15 @@ class MainActivity : AppCompatActivity() {
                                     var text2 = "카카오톡 유료화"
                                     var nolist = "검색 결과가 없습니다."
 
-                                    economyRest.requestServer(text1).enqueue(object: Callback<Economy_requests> {
-                                        override fun onFailure(call: Call<Economy_requests>, t: Throwable) {
+                                    economyRest.requestServer(text1).enqueue(object: Callback<Politics_requests> {
+                                        override fun onFailure(call: Call<Politics_requests>, t: Throwable) {
                                             var dialog = AlertDialog.Builder(this@MainActivity)
                                             dialog.setTitle("에러")
                                             dialog.setMessage("호출실패했습니다.")
                                             dialog.show()
                                         }
 
-                                        override fun onResponse(call: Call<Economy_requests>, response: Response<Economy_requests>) {
+                                        override fun onResponse(call: Call<Politics_requests>, response: Response<Politics_requests>) {
                                             var send_test = response.body()
                                             try {
                                                 Log.d("LOGIN","msg : "+send_test?.response)
@@ -124,15 +124,15 @@ class MainActivity : AppCompatActivity() {
                                     var text2 = "카카오톡 유료화"
                                     var nolist = "검색 결과가 없습니다."
 
-                                    societyRest.requestServer(text1).enqueue(object: Callback<Society_requests> {
-                                        override fun onFailure(call: Call<Society_requests>, t: Throwable) {
+                                    societyRest.requestServer(text1).enqueue(object: Callback<Politics_requests> {
+                                        override fun onFailure(call: Call<Politics_requests>, t: Throwable) {
                                             var dialog = AlertDialog.Builder(this@MainActivity)
                                             dialog.setTitle("에러")
                                             dialog.setMessage("호출실패했습니다.")
                                             dialog.show()
                                         }
 
-                                        override fun onResponse(call: Call<Society_requests>, response: Response<Society_requests>) {
+                                        override fun onResponse(call: Call<Politics_requests>, response: Response<Politics_requests>) {
                                             var send_test = response.body()
                                             try {
                                                 Log.d("LOGIN","msg : "+send_test?.response)
@@ -162,15 +162,15 @@ class MainActivity : AppCompatActivity() {
                                     var text2 = "카카오톡 유료화"
                                     var nolist = "검색 결과가 없습니다."
 
-                                    othersRest.requestServer(text1).enqueue(object: Callback<Others_requests> {
-                                        override fun onFailure(call: Call<Others_requests>, t: Throwable) {
+                                    othersRest.requestServer(text1).enqueue(object: Callback<Politics_requests> {
+                                        override fun onFailure(call: Call<Politics_requests>, t: Throwable) {
                                             var dialog = AlertDialog.Builder(this@MainActivity)
                                             dialog.setTitle("에러")
                                             dialog.setMessage("호출실패했습니다.")
                                             dialog.show()
                                         }
 
-                                        override fun onResponse(call: Call<Others_requests>, response: Response<Others_requests>) {
+                                        override fun onResponse(call: Call<Politics_requests>, response: Response<Politics_requests>) {
                                             var send_test = response.body()
                                             try {
                                                 Log.d("LOGIN","msg : "+send_test?.response)
